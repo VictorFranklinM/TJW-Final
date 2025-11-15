@@ -22,4 +22,16 @@ public class Matricula {
     @Enumerated(EnumType.STRING)
     private SituacaoMatricula situacao;
     private Double notaFinal;
+
+    public Long getId() { return id; }
+    public Aluno getAluno() { return aluno; }
+    public void setAluno(Aluno aluno) { this.aluno = aluno; }
+    public Disciplina getDisciplina() { return disciplina; }
+    public void setDisciplina(Disciplina disciplina) { this.disciplina = disciplina; }
+    public LocalDate getDataMatricula() { return dataMatricula; }
+    public void setDataMatricula(LocalDate dataMatricula) { this.dataMatricula = dataMatricula; }
+    public SituacaoMatricula getSituacao() { return situacao; }
+    public void setSituacao(SituacaoMatricula situacao) { this.situacao = situacao; }
+    public Double getNotaFinal() { return notaFinal; }
+    public void setNotaFinal(Double notaFinal) { this.notaFinal = notaFinal; }
 }
