@@ -54,14 +54,19 @@ public class AlunoService {
         return alunoRepository.save(atual);
     }
 
-    public void alterarStatus(Long id, StatusAluno status) {
+    public Aluno alterarStatus(Long id, StatusAluno status) {
         Aluno aluno = buscar(id);
         aluno.setStatus(status);
         alunoRepository.save(aluno);
+        return aluno;
     }
 
     public void excluir(Long id) {
         buscar(id);
         alunoRepository.deleteById(id);
+    }
+
+    public Aluno criarAluno(Aluno aluno) {
+        return aluno;
     }
 }

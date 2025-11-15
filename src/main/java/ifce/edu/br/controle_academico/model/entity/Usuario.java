@@ -13,6 +13,7 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public void setId(Long id) { this.id = id; }
     public Long getId() { return id; }
     public String getLogin() { return login; }
     public void setLogin(String login) { this.login = login; }

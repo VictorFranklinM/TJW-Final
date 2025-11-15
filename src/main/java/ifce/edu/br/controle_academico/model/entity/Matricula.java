@@ -23,6 +23,7 @@ public class Matricula {
     private SituacaoMatricula situacao;
     private Double notaFinal;
 
+    public void setId(Long id) { this.id = id; }
     public Long getId() { return id; }
     public Aluno getAluno() { return aluno; }
     public void setAluno(Aluno aluno) { this.aluno = aluno; }
