@@ -42,6 +42,9 @@ public class MatriculaService {
 
         return matriculaRepository.save(m);
     }
+    public List<Matricula> listarTodas() {
+        return matriculaRepository.findAll();
+    }
 
     public Matricula buscar(Long id) {
         return matriculaRepository.findById(id)
@@ -55,6 +58,12 @@ public class MatriculaService {
     public Matricula atualizarSituacao(Long id, SituacaoMatricula situacao) {
         Matricula m = buscar(id);
         m.setSituacao(situacao);
+        return matriculaRepository.save(m);
+    }
+
+    public Matricula atualizarNota(Long id, Double nota) {
+        Matricula m = buscar(id);
+        m.setNotaFinal(nota);
         return matriculaRepository.save(m);
     }
 

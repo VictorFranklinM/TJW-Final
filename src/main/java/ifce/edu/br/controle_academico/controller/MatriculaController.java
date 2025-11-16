@@ -1,6 +1,7 @@
 package ifce.edu.br.controle_academico.controller;
 
 import ifce.edu.br.controle_academico.model.entity.*;
+import ifce.edu.br.controle_academico.model.enums.SituacaoMatricula;
 import ifce.edu.br.controle_academico.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,7 @@ public class MatriculaController {
 
     @GetMapping
     public String listar(Model model) {
-        model.addAttribute("matriculas", matriculaService.historico(null));
+        model.addAttribute("matriculas", matriculaService.listarTodas());
         return "matriculas/lista";
     }
 
@@ -52,4 +53,32 @@ public class MatriculaController {
         matriculaService.excluir(id);
         return "redirect:/matriculas";
     }
+
+    @GetMapping("/nota/{id}")
+    public String editarNota(@PathVariable Long id, Model model) {
+        model.addAttribute("matricula", matriculaService.buscar(id));
+        return "matriculas/nota";
+    }
+
+    @PostMapping("/nota")
+    public String salvarNota(@RequestParam Long id, @RequestParam Double notaFinal) {
+        matriculaService.atualizarNota(id, notaFinal);
+        return "redirect:/matriculas";
+    }
+
+    @GetMapping("/situacao/{id}")
+    public String editarSituacao(@PathVariable Long id, Model model) {
+        model.addAttribute("matricula", matriculaService.buscar(id));
+        model.addAttribute("situacoes", SituacaoMatricula.values());
+        return "matriculas/situacao";
+    }
+
+    @PostMapping("/situacao/{id}")
+    public String atualizarSituacao(@PathVariable Long id,
+                                    @RequestParam("situacao") SituacaoMatricula situacao) {
+
+        matriculaService.atualizarSituacao(id, situacao);
+        return "redirect:/matriculas";
+    }
+
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alterar Situação</title>
+</head>
+<body>
+
+<h1>Alterar Situação da Matrícula</h1>
+
+<p><strong>Aluno:</strong> <span th:text="${matricula.aluno.nome}"></span></p>
+<p><strong>Disciplina:</strong> <span th:text="${matricula.disciplina.nome}"></span></p>
+
+<form th:action="@{/matriculas/situacao/{id}(id=${matricula.id})}" method="post">
+
+    <label>Situação:</label>
+    <select name="situacao">
+        <option th:each="s : ${situacoes}"
+                th:value="${s}"
+                th:selected="${s == matricula.situacao}"
+                th:text="${s}">
+        </option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<a th:href="@{/matriculas}">Voltar</a>
+
+</body>
+</html>

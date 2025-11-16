@@ -27,12 +27,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                         .requestMatchers("/", "/login", "/register").permitAll()
-
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-
-                        .requestMatchers("/alunos/**", "/matriculas/**", "/disciplinas/**")
+                        .requestMatchers("/disciplinas/novo",
+                                "/disciplinas/editar/**",
+                                "/disciplinas/excluir/**")
+                        .hasRole("ADMIN")
+                        .requestMatchers("/disciplinas/**")
                         .hasAnyRole("ADMIN", "SECRETARIA")
-
+                        .requestMatchers("/alunos/**", "/matriculas/**")
+                        .hasAnyRole("ADMIN", "SECRETARIA")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
@@ -45,8 +48,7 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
-                )
-                .userDetailsService(userDetailsService);
+                );
 
         return http.build();
     }
@@ -57,8 +59,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration config)
-            throws Exception {
+    public AuthenticationManager authenticationManager(
+            org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration config
+    ) throws Exception {
         return config.getAuthenticationManager();
     }
 }

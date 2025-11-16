@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nova Matrícula</title>
+</head>
+<body>
+
+<h1>Nova Matrícula</h1>
+
+<form th:action="@{/matriculas}" method="post">
+
+    <label>Aluno:</label>
+    <select name="alunoId" required>
+        <option value="">Selecione</option>
+        <option th:each="a : ${alunos}"
+                th:value="${a.id}"
+                th:text="${a.nome}">
+        </option>
+    </select>
+    <br><br>
+
+    <label>Disciplina:</label>
+    <select name="disciplinaId" required>
+        <option value="">Selecione</option>
+        <option th:each="d : ${disciplinas}"
+                th:value="${d.id}"
+                th:text="${d.nome}">
+        </option>
+    </select>
+    <br><br>
+
+    <button type="submit">Matricular</button>
+</form>
+
+<a th:href="@{/matriculas}">Voltar</a>
+
+</body>
+</html>

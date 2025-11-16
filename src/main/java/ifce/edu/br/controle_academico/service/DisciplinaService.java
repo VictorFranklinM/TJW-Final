@@ -43,6 +43,7 @@ public class DisciplinaService {
         atual.setNome(novo.getNome());
         atual.setCodigo(novo.getCodigo());
         atual.setSemestre(novo.getSemestre());
+        atual.setCargaHoraria(novo.getCargaHoraria());
 
         return disciplinaRepository.save(atual);
     }

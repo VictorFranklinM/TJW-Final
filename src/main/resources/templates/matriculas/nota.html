@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lançar Nota</title>
+</head>
+<body>
+
+<h1>Lançar Nota para <span th:text="${matricula.aluno.nome}"></span></h1>
+
+<form th:action="@{/matriculas/nota}" method="post">
+    <input type="hidden" name="id" th:value="${matricula.id}"/>
+
+    <label>Disciplina:</label>
+    <span th:text="${matricula.disciplina.nome}"></span>
+    <br><br>
+
+    <label>Nota Final:</label>
+    <input type="number" step="0.01" name="notaFinal" th:value="${matricula.notaFinal}">
+    <br><br>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<a th:href="@{/matriculas}">Voltar</a>
+
+</body>
+</html>

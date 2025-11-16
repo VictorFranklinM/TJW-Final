@@ -39,7 +39,6 @@ public class AlunoService {
 
     public Aluno atualizar(Long id, Aluno novo) {
         Aluno atual = buscar(id);
-
         if (!atual.getMatricula().equals(novo.getMatricula())) {
             alunoRepository.findByMatricula(novo.getMatricula())
                     .ifPresent(a -> {
@@ -49,8 +48,9 @@ public class AlunoService {
 
         atual.setNome(novo.getNome());
         atual.setMatricula(novo.getMatricula());
+        atual.setEmail(novo.getEmail());
+        atual.setDataNascimento(novo.getDataNascimento());
         atual.setStatus(novo.getStatus());
-
         return alunoRepository.save(atual);
     }
 
@@ -64,9 +64,5 @@ public class AlunoService {
     public void excluir(Long id) {
         buscar(id);
         alunoRepository.deleteById(id);
-    }
-
-    public Aluno criarAluno(Aluno aluno) {
-        return aluno;
     }
 }

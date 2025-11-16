@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Matrículas</title>
+</head>
+<body>
+
+<h1>Histórico de Matrículas</h1>
+
+<a th:href="@{/matriculas/nova}">Nova Matrícula</a>
+
+<br><br>
+
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Aluno</th>
+        <th>Disciplina</th>
+        <th>Data</th>
+        <th>Situação</th>
+        <th>Nota Final</th>
+        <th>Ações</th>
+    </tr>
+
+    <tr th:each="m : ${matriculas}">
+        <td th:text="${m.id}"></td>
+        <td th:text="${m.aluno.nome}"></td>
+        <td th:text="${m.disciplina.nome}"></td>
+        <td th:text="${m.dataMatricula}"></td>
+
+        <td th:text="${m.situacao}"></td>
+
+        <td th:text="${m.notaFinal != null ? m.notaFinal : '-'}"></td>
+
+        <td>
+            <a th:href="@{/matriculas/situacao/{id}(id=${m.id})}">
+                Alterar Situação
+            </a>
+            |
+            <a th:href="@{/matriculas/nota/{id}(id=${m.id})}">
+                Lançar Nota
+            </a>
+            |
+            <a th:href="@{/matriculas/excluir/{id}(id=${m.id})}"
+               onclick="return confirm('Excluir matrícula?')">
+                Excluir
+            </a>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>
