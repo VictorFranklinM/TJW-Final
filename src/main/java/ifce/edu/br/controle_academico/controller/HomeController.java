@@ -15,4 +15,9 @@ public class HomeController {
     public String login() {
         return "login";
     }
+
+    @GetMapping("/403")
+    public String forbidden() {
+        return "error/403";
+    }
 }

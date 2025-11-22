@@ -2,54 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Matrículas</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<h1>Histórico de Matrículas</h1>
+<div class="navbar">
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/alunos}">Alunos</a>
+    <a th:href="@{/disciplinas}">Disciplinas</a>
+    <a th:href="@{/matriculas}">Matrículas</a>
+    <a th:href="@{/logout}">Sair</a>
+</div>
 
-<a th:href="@{/matriculas/nova}">Nova Matrícula</a>
+<div class="container">
 
-<br><br>
+    <h1>Histórico de Matrículas</h1>
 
-<table border="1">
+    <a class="btn" th:href="@{/matriculas/nova}">Nova Matrícula</a>
 
-    <tr>
-        <th>ID</th>
-        <th>Aluno</th>
-        <th>Disciplina</th>
-        <th>Data</th>
-        <th>Situação</th>
-        <th>Nota Final</th>
-        <th>Ações</th>
-    </tr>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Aluno</th>
+            <th>Disciplina</th>
+            <th>Data</th>
+            <th>Situação</th>
+            <th>Nota Final</th>
+            <th>Ações</th>
+        </tr>
 
-    <tr th:each="m : ${matriculas}">
-        <td th:text="${m.id}"></td>
-        <td th:text="${m.aluno.nome}"></td>
-        <td th:text="${m.disciplina.nome}"></td>
-        <td th:text="${m.dataMatricula}"></td>
+        <tr th:each="m : ${matriculas}">
+            <td th:text="${m.id}"></td>
+            <td th:text="${m.aluno.nome}"></td>
+            <td th:text="${m.disciplina.nome}"></td>
+            <td th:text="${m.dataMatricula}"></td>
+            <td th:text="${m.situacao}"></td>
+            <td th:text="${m.notaFinal != null ? m.notaFinal : '-'}"></td>
 
-        <td th:text="${m.situacao}"></td>
+            <td>
+                <a th:href="@{/matriculas/situacao/{id}(id=${m.id})}">Alterar Situação</a> |
+                <a th:href="@{/matriculas/nota/{id}(id=${m.id})}">Lançar Nota</a> |
+                <a th:href="@{/matriculas/excluir/{id}(id=${m.id})}"
+                   onclick="return confirm('Excluir matrícula?')">Excluir</a>
+            </td>
+        </tr>
 
-        <td th:text="${m.notaFinal != null ? m.notaFinal : '-'}"></td>
+    </table>
 
-        <td>
-            <a th:href="@{/matriculas/situacao/{id}(id=${m.id})}">
-                Alterar Situação
-            </a>
-            |
-            <a th:href="@{/matriculas/nota/{id}(id=${m.id})}">
-                Lançar Nota
-            </a>
-            |
-            <a th:href="@{/matriculas/excluir/{id}(id=${m.id})}"
-               onclick="return confirm('Excluir matrícula?')">
-                Excluir
-            </a>
-        </td>
-    </tr>
-
-</table>
-
+</div>
 </body>
 </html>

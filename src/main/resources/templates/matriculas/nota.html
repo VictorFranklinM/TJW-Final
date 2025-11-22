@@ -2,26 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Lançar Nota</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<h1>Lançar Nota para <span th:text="${matricula.aluno.nome}"></span></h1>
+<div class="navbar">
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/alunos}">Alunos</a>
+    <a th:href="@{/disciplinas}">Disciplinas</a>
+    <a th:href="@{/matriculas}">Matrículas</a>
+    <a th:href="@{/logout}">Sair</a>
+</div>
 
-<form th:action="@{/matriculas/nota}" method="post">
-    <input type="hidden" name="id" th:value="${matricula.id}"/>
+<div class="container">
 
-    <label>Disciplina:</label>
-    <span th:text="${matricula.disciplina.nome}"></span>
-    <br><br>
+    <h1>Lançar Nota</h1>
 
-    <label>Nota Final:</label>
-    <input type="number" step="0.01" name="notaFinal" th:value="${matricula.notaFinal}">
-    <br><br>
+    <form th:action="@{/matriculas/nota}" method="post">
 
-    <button type="submit">Salvar</button>
-</form>
+        <input type="hidden" name="id" th:value="${matricula.id}"/>
 
-<a th:href="@{/matriculas}">Voltar</a>
+        <p><strong>Aluno:</strong> <span th:text="${matricula.aluno.nome}"></span></p>
+        <p><strong>Disciplina:</strong> <span th:text="${matricula.disciplina.nome}"></span></p>
 
+        <label>Nota Final:</label>
+        <input type="number" step="0.01" name="notaFinal" th:value="${matricula.notaFinal}">
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <br>
+    <a class="btn-secondary" th:href="@{/matriculas}">Voltar</a>
+
+</div>
 </body>
 </html>

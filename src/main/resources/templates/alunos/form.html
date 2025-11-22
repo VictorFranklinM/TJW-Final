@@ -2,39 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cadastro de Aluno</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<h1 th:text="${aluno.id == null} ? 'Novo Aluno' : 'Editar Aluno'"></h1>
+<div class="navbar">
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/alunos}">Alunos</a>
+    <a th:href="@{/disciplinas}">Disciplinas</a>
+    <a th:href="@{/matriculas}">Matrículas</a>
+    <a th:href="@{/logout}">Sair</a>
+</div>
 
-<form th:action="@{/alunos}" th:object="${aluno}" method="post">
+<div class="container">
 
-    <!-- Campo oculto para edição -->
-    <input type="hidden" th:field="*{id}"/>
+    <h1 th:text="${aluno.id == null} ? 'Novo Aluno' : 'Editar Aluno'"></h1>
 
-    <label>Nome:</label>
-    <input type="text" th:field="*{nome}" required><br><br>
+    <form th:action="@{/alunos}" th:object="${aluno}" method="post">
 
-    <label>Matrícula:</label>
-    <input type="text" th:field="*{matricula}" required><br><br>
+        <input type="hidden" th:field="*{id}"/>
 
-    <label>Email:</label>
-    <input type="email" th:field="*{email}" required><br><br>
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}" required>
 
-    <label>Data de Nascimento:</label>
-    <input type="date" th:field="*{dataNascimento}" required><br><br>
+        <label>Matrícula:</label>
+        <input type="text" th:field="*{matricula}" required>
 
-    <label>Status:</label>
-    <select th:field="*{status}">
-        <option value="ATIVO">ATIVO</option>
-        <option value="INATIVO">INATIVO</option>
-    </select>
-    <br><br>
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" required>
 
-    <button type="submit">Salvar</button>
-</form>
+        <label>Data de Nascimento:</label>
+        <input type="date" th:field="*{dataNascimento}" required>
 
-<a th:href="@{/alunos}">Voltar</a>
+        <label>Status:</label>
+        <select th:field="*{status}">
+            <option value="ATIVO">ATIVO</option>
+            <option value="INATIVO">INATIVO</option>
+        </select>
 
+        <button type="submit">Salvar</button>
+    </form>
+
+    <br>
+    <a class="btn-secondary" th:href="@{/alunos}">Voltar</a>
+
+</div>
 </body>
 </html>

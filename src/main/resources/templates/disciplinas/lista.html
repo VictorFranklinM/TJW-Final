@@ -2,36 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Disciplinas</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<h1>Lista de Disciplinas</h1>
+<div class="navbar">
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/alunos}">Alunos</a>
+    <a th:href="@{/disciplinas}">Disciplinas</a>
+    <a th:href="@{/matriculas}">Matrículas</a>
+    <a th:href="@{/logout}">Sair</a>
+</div>
 
-<a th:href="@{/disciplinas/novo}">Nova Disciplina</a>
+<div class="container">
 
-<table border="1">
+    <h1>Lista de Disciplinas</h1>
 
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Carga Horária</th>
-        <th>Ações</th>
-    </tr>
+    <a class="btn" th:href="@{/disciplinas/novo}">Nova Disciplina</a>
 
-    <tr th:each="d: ${disciplinas}">
-        <td th:text="${d.id}"></td>
-        <td th:text="${d.nome}"></td>
-        <td th:text="${d.cargaHoraria}"></td>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Carga Horária</th>
+            <th>Semestre</th>
+            <th>Ações</th>
+        </tr>
 
-        <td>
-            <a th:href="@{/disciplinas/editar/{id}(id=${d.id})}">Editar</a>
-            |
-            <a th:href="@{/disciplinas/excluir/{id}(id=${d.id})}"
-               onclick="return confirm('Excluir disciplina?')">Excluir</a>
-        </td>
-    </tr>
+        <tr th:each="d: ${disciplinas}">
+            <td th:text="${d.id}"></td>
+            <td th:text="${d.nome}"></td>
+            <td th:text="${d.cargaHoraria}"></td>
+            <td th:text="${d.semestre}"></td>
 
-</table>
+            <td>
+                <a th:href="@{/disciplinas/editar/{id}(id=${d.id})}">Editar</a> |
+                <a th:href="@{/disciplinas/excluir/{id}(id=${d.id})}"
+                   onclick="return confirm('Excluir disciplina?')">Excluir</a>
+            </td>
+        </tr>
 
+    </table>
+
+</div>
 </body>
 </html>

@@ -2,37 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Nova Matrícula</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<h1>Nova Matrícula</h1>
+<div class="navbar">
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/alunos}">Alunos</a>
+    <a th:href="@{/disciplinas}">Disciplinas</a>
+    <a th:href="@{/matriculas}">Matrículas</a>
+    <a th:href="@{/logout}">Sair</a>
+</div>
 
-<form th:action="@{/matriculas}" method="post">
+<div class="container">
 
-    <label>Aluno:</label>
-    <select name="alunoId" required>
-        <option value="">Selecione</option>
-        <option th:each="a : ${alunos}"
-                th:value="${a.id}"
-                th:text="${a.nome}">
-        </option>
-    </select>
-    <br><br>
+    <h1>Nova Matrícula</h1>
 
-    <label>Disciplina:</label>
-    <select name="disciplinaId" required>
-        <option value="">Selecione</option>
-        <option th:each="d : ${disciplinas}"
-                th:value="${d.id}"
-                th:text="${d.nome}">
-        </option>
-    </select>
-    <br><br>
+    <form th:action="@{/matriculas}" method="post">
 
-    <button type="submit">Matricular</button>
-</form>
+        <label>Aluno:</label>
+        <select name="alunoId" required>
+            <option value="">Selecione</option>
+            <option th:each="a : ${alunos}" th:value="${a.id}" th:text="${a.nome}"></option>
+        </select>
 
-<a th:href="@{/matriculas}">Voltar</a>
+        <label>Disciplina:</label>
+        <select name="disciplinaId" required>
+            <option value="">Selecione</option>
+            <option th:each="d : ${disciplinas}" th:value="${d.id}" th:text="${d.nome}"></option>
+        </select>
 
+        <button type="submit">Matricular</button>
+    </form>
+
+    <br>
+    <a class="btn-secondary" th:href="@{/matriculas}">Voltar</a>
+
+</div>
 </body>
 </html>

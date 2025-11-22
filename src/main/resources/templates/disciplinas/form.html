@@ -2,32 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Disciplina</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<h1 th:text="${disciplina.id == null} ? 'Nova Disciplina' : 'Editar Disciplina'"></h1>
+<div class="navbar">
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/alunos}">Alunos</a>
+    <a th:href="@{/disciplinas}">Disciplinas</a>
+    <a th:href="@{/matriculas}">Matrículas</a>
+    <a th:href="@{/logout}">Sair</a>
+</div>
 
-<form th:action="@{/disciplinas}" th:object="${disciplina}" method="post">
+<div class="container">
 
-    <!-- ID HIDDEN (fundamental para edição funcionar) -->
-    <input type="hidden" th:field="*{id}"/>
+    <h1 th:text="${disciplina.id == null} ? 'Nova Disciplina' : 'Editar Disciplina'"></h1>
 
-    <label>Código:</label>
-    <input type="text" th:field="*{codigo}" required><br><br>
+    <form th:action="@{/disciplinas}" th:object="${disciplina}" method="post">
 
-    <label>Nome:</label>
-    <input type="text" th:field="*{nome}" required><br><br>
+        <input type="hidden" th:field="*{id}"/>
 
-    <label>Carga Horária:</label>
-    <input type="number" th:field="*{cargaHoraria}" required><br><br>
+        <label>Código:</label>
+        <input type="text" th:field="*{codigo}" required>
 
-    <label>Semestre:</label>
-    <input type="text" th:field="*{semestre}" required><br><br>
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}" required>
 
-    <button type="submit">Salvar</button>
-</form>
+        <label>Carga Horária:</label>
+        <input type="number" th:field="*{cargaHoraria}" required>
 
-<a th:href="@{/disciplinas}">Voltar</a>
+        <label>Semestre:</label>
+        <input type="text" th:field="*{semestre}" required>
 
+        <button type="submit">Salvar</button>
+    </form>
+
+    <br>
+    <a class="btn-secondary" th:href="@{/disciplinas}">Voltar</a>
+
+</div>
 </body>
 </html>
