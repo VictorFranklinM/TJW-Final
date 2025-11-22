@@ -1,5 +1,6 @@
 package ifce.edu.br.controle_academico.service;
 
+import ifce.edu.br.controle_academico.exception.DisciplinaException;
 import ifce.edu.br.controle_academico.model.entity.Disciplina;
 import ifce.edu.br.controle_academico.repository.DisciplinaRepository;
 import org.springframework.data.domain.Page;
@@ -17,7 +18,7 @@ public class DisciplinaService {
     public Disciplina criar(Disciplina d) {
 
         if (disciplinaRepository.existsByCodigo(d.getCodigo())) {
-            throw new RuntimeException("Já existe uma disciplina com esse código.");
+            throw new DisciplinaException("Já existe uma disciplina com esse código.");
         }
 
         return disciplinaRepository.save(d);
@@ -37,7 +38,7 @@ public class DisciplinaService {
 
         if (!atual.getCodigo().equals(novo.getCodigo())
                 && disciplinaRepository.existsByCodigo(novo.getCodigo())) {
-            throw new RuntimeException("Código já está em uso.");
+            throw new DisciplinaException("Código já está em uso.");
         }
 
         atual.setNome(novo.getNome());

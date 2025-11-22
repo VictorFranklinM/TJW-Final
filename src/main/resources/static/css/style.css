@@ -111,3 +111,15 @@ form select {
 .navbar a:hover {
     text-decoration: underline;
 }
+
+.alert {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.alert-danger {
+    background-color: #ffd4d4;
+    border-left: 4px solid #c70000;
+    color: #700000;
+}

@@ -18,6 +18,10 @@
 
     <h1>Lista de Alunos</h1>
 
+    <div th:if="${erro}" class="alert alert-danger">
+        <p th:text="${erro}"></p>
+    </div>
+
     <a class="btn" th:href="@{/alunos/novo}">Novo Aluno</a>
 
     <table>
@@ -43,7 +47,7 @@
             <td th:text="${a.status}"></td>
 
             <td>
-                <a th:href="@{/alunos/editar/{id}(id=${a.id})}">Editar</a> |
+                <a th:href="@{/alunos/editar/{id}(id=${a.id})}">Editar</a><br>
                 <a th:href="@{/alunos/excluir/{id}(id=${a.id})}"
                    onclick="return confirm('Excluir aluno?')">Excluir</a>
             </td>

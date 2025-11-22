@@ -16,6 +16,11 @@
 
 <div class="container">
     <h1>Bem-vindo ao Sistema Acadêmico</h1>
+
+    <div th:if="${erro}" class="alert alert-danger">
+        <p th:text="${erro}"></p>
+    </div>
+
     <p>Utilize o menu acima para navegar.</p>
 </div>
 

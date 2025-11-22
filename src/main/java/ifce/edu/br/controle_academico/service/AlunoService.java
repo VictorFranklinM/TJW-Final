@@ -1,5 +1,7 @@
 package ifce.edu.br.controle_academico.service;
 
+import ifce.edu.br.controle_academico.exception.AlunoException;
+import ifce.edu.br.controle_academico.exception.DisciplinaException;
 import ifce.edu.br.controle_academico.model.entity.Aluno;
 import ifce.edu.br.controle_academico.model.enums.StatusAluno;
 import ifce.edu.br.controle_academico.repository.AlunoRepository;
@@ -20,7 +22,7 @@ public class AlunoService {
 
         alunoRepository.findByMatricula(aluno.getMatricula())
                 .ifPresent(a -> {
-                    throw new RuntimeException("Já existe um aluno com essa matrícula.");
+                    throw new AlunoException("Já existe um aluno com essa matrícula.");
                 });
 
         aluno.setStatus(StatusAluno.ATIVO);
@@ -42,7 +44,7 @@ public class AlunoService {
         if (!atual.getMatricula().equals(novo.getMatricula())) {
             alunoRepository.findByMatricula(novo.getMatricula())
                     .ifPresent(a -> {
-                        throw new RuntimeException("Já existe um aluno com essa matrícula.");
+                        throw new AlunoException("Já existe um aluno com essa matrícula.");
                     });
         }
 

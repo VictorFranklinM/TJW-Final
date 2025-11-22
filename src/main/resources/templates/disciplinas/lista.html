@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Disciplinas</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -18,7 +18,15 @@
 
     <h1>Lista de Disciplinas</h1>
 
-    <a class="btn" th:href="@{/disciplinas/novo}">Nova Disciplina</a>
+    <div th:if="${erro}" class="alert alert-danger">
+        <p th:text="${erro}"></p>
+    </div>
+
+    <a class="btn"
+       th:href="@{/disciplinas/novo}"
+       sec:authorize="hasRole('ADMIN')">
+        Nova Disciplina
+    </a>
 
     <table>
         <tr>
@@ -36,9 +44,15 @@
             <td th:text="${d.semestre}"></td>
 
             <td>
-                <a th:href="@{/disciplinas/editar/{id}(id=${d.id})}">Editar</a> |
+                <a th:href="@{/disciplinas/editar/{id}(id=${d.id})}"
+                   sec:authorize="hasRole('ADMIN')">
+                    Editar
+                </a><br>
                 <a th:href="@{/disciplinas/excluir/{id}(id=${d.id})}"
-                   onclick="return confirm('Excluir disciplina?')">Excluir</a>
+                   sec:authorize="hasRole('ADMIN')"
+                   onclick="return confirm('Excluir disciplina?')">
+                    Excluir
+                </a>
             </td>
         </tr>
 

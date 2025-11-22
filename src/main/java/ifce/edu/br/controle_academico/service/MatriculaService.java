@@ -1,5 +1,6 @@
 package ifce.edu.br.controle_academico.service;
 
+import ifce.edu.br.controle_academico.exception.MatriculaException;
 import ifce.edu.br.controle_academico.model.entity.Aluno;
 import ifce.edu.br.controle_academico.model.entity.Disciplina;
 import ifce.edu.br.controle_academico.model.entity.Matricula;
@@ -31,7 +32,7 @@ public class MatriculaService {
                 .existsByAlunoAndDisciplinaAndSituacaoIn(aluno, disciplina, ATIVAS);
 
         if (jaExiste) {
-            throw new RuntimeException("Aluno já possui matrícula ativa nesta disciplina.");
+            throw new MatriculaException("Aluno já possui matrícula ativa nesta disciplina.");
         }
 
         Matricula m = new Matricula();

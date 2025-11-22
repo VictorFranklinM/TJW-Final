@@ -1,5 +1,6 @@
 package ifce.edu.br.controle_academico.service;
 
+import ifce.edu.br.controle_academico.exception.UsuarioException;
 import ifce.edu.br.controle_academico.model.entity.Usuario;
 import ifce.edu.br.controle_academico.model.enums.Role;
 import ifce.edu.br.controle_academico.repository.UsuarioRepository;
@@ -21,7 +22,7 @@ public class UsuarioService {
     public Usuario criar(Usuario usuario) {
 
         if (usuarioRepository.existsByLogin(usuario.getLogin())) {
-            throw new RuntimeException("Login já está em uso.");
+            throw new UsuarioException("Login já está em uso.");
         }
 
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
@@ -43,7 +44,7 @@ public class UsuarioService {
 
         if (!atual.getLogin().equals(novo.getLogin())
                 && usuarioRepository.existsByLogin(novo.getLogin())) {
-            throw new RuntimeException("Login já está sendo usado.");
+            throw new UsuarioException("Login já está sendo usado.");
         }
 
         atual.setLogin(novo.getLogin());

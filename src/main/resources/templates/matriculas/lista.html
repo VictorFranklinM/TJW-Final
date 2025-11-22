@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Matrículas</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -17,6 +17,10 @@
 <div class="container">
 
     <h1>Histórico de Matrículas</h1>
+
+    <div th:if="${erro}" class="alert alert-danger">
+        <p th:text="${erro}"></p>
+    </div>
 
     <a class="btn" th:href="@{/matriculas/nova}">Nova Matrícula</a>
 
@@ -40,11 +44,21 @@
             <td th:text="${m.notaFinal != null ? m.notaFinal : '-'}"></td>
 
             <td>
-                <a th:href="@{/matriculas/situacao/{id}(id=${m.id})}">Alterar Situação</a> |
-                <a th:href="@{/matriculas/nota/{id}(id=${m.id})}">Lançar Nota</a> |
+                <a th:href="@{/matriculas/situacao/{id}(id=${m.id})}"
+                   sec:authorize="hasAnyRole('ADMIN', 'SECRETARIA')">
+                    Situação
+                </a><br>
+                <a th:href="@{/matriculas/nota/{id}(id=${m.id})}"
+                   sec:authorize="hasAnyRole('ADMIN', 'SECRETARIA')">
+                    Nota
+                </a><br>
                 <a th:href="@{/matriculas/excluir/{id}(id=${m.id})}"
-                   onclick="return confirm('Excluir matrícula?')">Excluir</a>
+                   onclick="return confirm('Excluir matrícula?')"
+                   sec:authorize="hasRole('ADMIN')">
+                    Excluir
+                </a>
             </td>
+
         </tr>
 
     </table>
